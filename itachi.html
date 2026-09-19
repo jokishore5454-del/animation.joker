@@ -457,9 +457,21 @@
   });
 
   /* ---------- HUD clock ---------- */
-  const clock=document.getElementById('hudClock');
-  setInterval(()=>{ clock.textContent=new Date().toTimeString().slice(0,8); },1000);
+const clock = document.getElementById('hudClock');
 
+  function updateClock() {
+    const now = new Date();
+
+    clock.textContent = now.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
   /* ================= LIGHTNING ENGINE (shared) ================= */
   function buildBolt(x1,y1,x2,y2,disp,detail){
     let pts=[{x:x1,y:y1},{x:x2,y:y2}];
